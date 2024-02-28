@@ -14,4 +14,12 @@ def hello (name):
     """
     print(f"Hello {name}!")
     
-        
+
+def random_number():
+    """Returns a random number between 0 and 1.
+
+    Returns:
+        float: A random number between 0 and 1.
+    """
+    import random
+    return random.random()
