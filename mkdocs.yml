@@ -81,6 +81,8 @@ nav:
     - Report Issues: https://github.com/nazifa02/geotask/issues
     - Examples:
         - examples/intro.ipynb
+    - Lab:
+        - lab/lab4.ipynb
     - API Reference:
           - geotask module: geotask.md
           - common module: common.md
