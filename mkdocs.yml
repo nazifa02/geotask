@@ -83,6 +83,7 @@ nav:
         - examples/intro.ipynb
     - Lab:
         - lab/lab4.ipynb
+        - lab/lab5.ipynb
     - API Reference:
           - geotask module: geotask.md
           - common module: common.md
