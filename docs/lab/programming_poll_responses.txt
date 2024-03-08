@@ -11,3 +11,11 @@ Programming is timesaving.
 It is space-savvy.
 The scripts are easily shareable.
 Everyone can contribute to its development.
+Programming is timesaving.
+It is spacesavvy.
+he scripts are easily shareable.
+Everyone can contribute to it's development.
+Programming is timesaving.
+It is space-savvy.
+The scripts are easily shareable.
+Everyone can contribute to it's development.
