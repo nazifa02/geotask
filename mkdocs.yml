@@ -81,6 +81,7 @@ nav:
     - Report Issues: https://github.com/nazifa02/geotask/issues
     - Examples:
         - examples/intro.ipynb
+        - examples/ipyleaflet.ipynb
     - Lab:
         - lab/lab4.ipynb
         - lab/lab5.ipynb
