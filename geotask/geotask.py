@@ -5,7 +5,7 @@ from ipyleaflet import Map, basemaps
 
 #
 
-class GlobalMap(ipyleaflet.Map):
+class Map(ipyleaflet.Map):
     """This is the map class that inherits from ipyleaflet.Map.
 
     Args:
