@@ -1,7 +1,7 @@
 """Main module."""
 
 import ipyleaflet
-from ipyleaflet import basemaps
+from ipyleaflet import Map, basemaps
 
 class Map(ipyleaflet.Map):
 
