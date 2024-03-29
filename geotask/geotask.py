@@ -3,6 +3,7 @@
 import ipyleaflet
 from ipyleaflet import Map, basemaps
 
+#
 
 class GlobalMap(ipyleaflet.Map):
     """This is the map class that inherits from ipyleaflet.Map.
