@@ -2,6 +2,6 @@
 
 __author__ = """Syeda Nazifa Tasneem"""
 __email__ = "nazifadu.g57@gmail.com"
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 
 from .geotask import Map
