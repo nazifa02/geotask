@@ -3,7 +3,13 @@
 import ipyleaflet
 from ipyleaflet import Map, basemaps
 
+
 class Map(ipyleaflet.Map):
+    """This is the map class that inherits from ipyleaflet.Map.
+
+    Args:
+        ipyleaflet (Map): The ipyleaflet map class.
+    """    
 
     def __init__(self, center=[20,0], zoom=2, **kwargs):
         super().__init__(center=center, zoom=zoom, **kwargs)
