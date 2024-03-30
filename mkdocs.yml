@@ -83,6 +83,7 @@ nav:
         - examples/intro.ipynb
         - examples/ipyleaflet.ipynb
         - examples/csv.ipynb
+        - examples/vector.ipynb
     - Lab:
         - lab/lab4.ipynb
         - lab/lab5.ipynb
