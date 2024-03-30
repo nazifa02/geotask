@@ -1,7 +1,7 @@
 """Main module."""
 
 import ipyleaflet
-from ipyleaflet import Map, basemaps
+from ipyleaflet import Map, basemaps, Marker, Polyline, TileLayer
 
 class Map(ipyleaflet.Map):
     """This is the map class that inherits from ipyleaflet.Map.
@@ -129,3 +129,29 @@ class Map(ipyleaflet.Map):
 
         layer = ipyleaflet.ImageOverlay(url=data, name=name, **kwargs)
         self.add(layer)
+
+
+        import geopandas as gpd
+        from ipyleaflet import GeoData
+        from shapely.geometry import Point, LineString
+
+    def add_vector(self, data):
+        """
+        Add vector data to the map.
+
+        Args:
+            data (str or geopandas.GeoDataFrame): The vector data to add. This can be a file path or a GeoDataFrame.
+        """
+        import geopandas as gpd
+        from ipyleaflet import GeoData
+
+        if isinstance(data, gpd.GeoDataFrame):
+            vector_layer = GeoData(geo_dataframe=data)
+            
+        elif isinstance(data, str):
+            vector_layer = GeoData(geo_dataframe=gpd.read_file(data))
+            
+        else:
+            raise ValueError("Unsupported data format. Please provide a GeoDataFrame or a file path.")
+
+        self.add_layer(vector_layer)
