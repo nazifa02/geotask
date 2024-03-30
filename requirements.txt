@@ -2,3 +2,4 @@ ipyleaflet
 numpy
 pandas
 pyshp
+geopandas 
