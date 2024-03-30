@@ -55,14 +55,25 @@ class Map(ipyleaflet.Map):
         """Adds a GeoJSON layer to the map.
 
         Args:
-            data (str | dict): The GeoJSON data as a string or a dictionary.
+            data (str | dict): The GeoJSON data as a string, a dictionary, or a URL.
             name (str, optional): The name of the layer. Defaults to "geojson".
         """
         import json
+        import requests
 
+        # If the input is a string, check if it's a file path or URL
+        
         if isinstance(data, str):
-            with open(data) as f:
-                 data = json.load(f)
+            if data.startswith('http://') or data.startswith('https://'):
+            # It's a URL, so we fetch the GeoJSON
+                response = requests.get(data)
+                response.raise_for_status()  # Raises an HTTPError if the HTTP request returned an unsuccessful status code
+                data = response.json()
+            else:
+                # It's a file path
+                with open(data, 'r') as f:
+                    data = json.load(f)
+
 
         if "style" not in kwargs:
             kwargs["style"] = {"color": "black", "weight": 1, "fillOpacity": 0}
