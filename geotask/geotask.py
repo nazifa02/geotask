@@ -9,11 +9,11 @@ class Map(ipyleaflet.Map):
     """This is the map class that inherits from ipyleaflet.Map.
 
     Args:
-        ipyleaflet (Map): The ipyleaflet map class.
+        ipyleaflet (Map): The ipyleaflet.Map class.
     """    
 
     def __init__(self, center=[20, 0], zoom=2, **kwargs):
-        """Initializes the map.
+        """Initialize the map.
 
         Args:
             center (list, optional): Set the center of the map. Defaults to [20, 0].
@@ -67,11 +67,10 @@ class Map(ipyleaflet.Map):
                  data = json.load(f)
 
         if "style" not in kwargs:
-            kwargs["style"] = {"color": "blue", "weight": 1, "fillOpacity": 0}
+            kwargs["style"] = {"color": "black", "weight": 1, "fillOpacity": 0}
 
         if "hover_style" not in kwargs:
-            kwargs["hover_style"] = {"fillColor": "blue", "fillOpacity": 0.5}
-
+            kwargs["hover_style"] = {"fillColor": "#542974", "fillOpacity": 0.7}
 
         layer = ipyleaflet.GeoJSON(data=data, name=name, **kwargs)
         self.add(layer)

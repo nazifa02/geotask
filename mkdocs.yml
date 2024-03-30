@@ -47,10 +47,10 @@ plugins:
     - mkdocs-jupyter:
           include_source: True
           ignore_h1_titles: True
-          execute: false
+          execute: True
           allow_errors: false
           ignore: ["conf.py"]
-          execute_ignore: ["*ignore.ipynb"]
+          execute_ignore: ["lab/lab5.ipynb", "lab/lab4.ipynb", "examples/ipyleaflet.ipynb"]
           
 markdown_extensions:
     - admonition
@@ -82,9 +82,11 @@ nav:
     - Examples:
         - examples/intro.ipynb
         - examples/ipyleaflet.ipynb
+        - examples/csv.ipynb
     - Lab:
         - lab/lab4.ipynb
         - lab/lab5.ipynb
     - API Reference:
           - geotask module: geotask.md
           - common module: common.md
+          - utils module: utils.md

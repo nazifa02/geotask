@@ -1,2 +1,3 @@
-numpy
 ipyleaflet
+numpy
+pandas
