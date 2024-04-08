@@ -17,6 +17,11 @@ class Map(ipyleaflet.Map):
             center (list, optional): Set the center of the map. Defaults to [20, 0].
             zoom (int, optional): Set the zoom level of the map. Defaults to 2.
         """        
+
+        if "scroll_wheel_zoom" not in kwargs:
+            kwargs["scroll_wheel_zoom"] = True
+
+
         super().__init__(center=center, zoom=zoom, **kwargs)
 
     def add_tile_layer(self, url, name, **kwargs):
@@ -110,37 +115,6 @@ class Map(ipyleaflet.Map):
         self.add_geojson(data, name, **kwargs)
 
     
-    def add_raster(self, data, name="raster", **kwargs):
-        """
-        Adds a raster layer to the current map.
-
-        Args:
-            data (str or dict): The path to the raster file as a string, or a dictionary representing the raster file.
-            name (str, optional): The name of the layer. Defaults to "raster".
-            **kwargs: Arbitrary keyword arguments.
-
-        Raises:
-            TypeError: If the data is neither a string nor a dictionary representing a raster file.
-
-        Returns:
-            None
-        """
-        import rasterio
-        import numpy as np
-
-        if isinstance(data, str):
-            with rasterio.open(data) as src:
-                data = src.read(1)
-                data = np.ma.masked_where(data == src.nodata, data)
-                data = data.filled(fill_value=0)
-                data = data.tolist()
-
-        if "opacity" not in kwargs:
-            kwargs["opacity"] = 0.7
-
-        layer = ipyleaflet.ImageOverlay(url=data, name=name, **kwargs)
-        self.add(layer)
-
 
         import geopandas as gpd
         from ipyleaflet import GeoData
@@ -166,3 +140,44 @@ class Map(ipyleaflet.Map):
             raise ValueError("Unsupported data format. Please provide a GeoDataFrame or a file path.")
 
         self.add_layer(vector_layer)
+
+
+
+    def add_image(self, url, bounds, name="image", **kwargs):
+        """
+        Adds an image overlay to the map.
+
+        Args:
+            url (str): The URL of the image to add.
+            bounds (list): The bounds of the image as a list of tuples.
+            name (str, optional): The name of the image overlay. Defaults to "image".
+        """
+        layer = ipyleaflet.ImageOverlay(url=url, bounds=bounds, name=name, **kwargs)
+        self.add(layer)
+
+
+    def add_raster(self, data, name="raster", zoom_to_layer=True, **kwargs):
+        """
+        Adds a raster layer to the map.
+
+        Args:
+            data (str or rasterio.DatasetReader): The raster data to add. This can be a file path or a rasterio dataset.
+            colormap (str, optional): The name of the colormap to use. Defaults to "inferno".
+            name (str, optional): The name of the raster layer. Defaults to "raster".
+            **kwargs: Arbitrary keyword arguments.
+        """
+
+
+        try:
+            import localtileserver
+            from localtileserver import TileClient, get_leaflet_tile_layer
+        except ImportError:
+                raise ImportError("You need to install the localtileserver package.")
+        
+        client = TileClient(data)
+        layer = get_leaflet_tile_layer(client, name=name, **kwargs)
+        self.add(layer)
+
+        if zoom_to_layer:
+            self.center = client.center()
+            self.zoom = client.default_zoom
