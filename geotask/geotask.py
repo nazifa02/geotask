@@ -2,6 +2,7 @@
 
 import ipyleaflet
 from ipyleaflet import Map, basemaps, Marker, Polyline, TileLayer
+import ipywidgets as widgets
 
 class Map(ipyleaflet.Map):
     """This is the map class that inherits from ipyleaflet.Map.
