@@ -24,6 +24,8 @@ class Map(ipyleaflet.Map):
 
 
         super().__init__(center=center, zoom=zoom, **kwargs)
+        if layer_control_flag:
+            self.add_layers_control()
 
     def add_tile_layer(self, url, name, **kwargs):
         layer = ipyleaflet.TileLayer(url=url, name=name, **kwargs)
