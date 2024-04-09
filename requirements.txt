@@ -2,4 +2,5 @@ ipyleaflet
 numpy
 pandas
 pyshp
-geopandas 
+geopandas
+localtileserver
