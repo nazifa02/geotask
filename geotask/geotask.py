@@ -178,11 +178,11 @@ class Map(ipyleaflet.Map):
             **kwargs: Arbitrary keyword arguments.
         """
 
-
         try:
             from localtileserver import TileClient, get_leaflet_tile_layer
         except ImportError:
-                raise ImportError("You need to install the localtileserver package.")
+            raise ImportError("Please install the localtileserver package.")
+        
         
         client = TileClient(data)
         layer = get_leaflet_tile_layer(client, name=name, **kwargs)
