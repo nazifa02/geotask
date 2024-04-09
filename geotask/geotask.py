@@ -180,7 +180,6 @@ class Map(ipyleaflet.Map):
 
 
         try:
-            import localtileserver
             from localtileserver import TileClient, get_leaflet_tile_layer
         except ImportError:
                 raise ImportError("You need to install the localtileserver package.")
