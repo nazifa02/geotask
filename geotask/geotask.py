@@ -168,8 +168,7 @@ class Map(ipyleaflet.Map):
 
 
     def add_raster(self, data, name="raster", zoom_to_layer=True, **kwargs):
-        """
-        Adds a raster layer to the map.
+        """Adds a raster layer to the map.
 
         Args:
             data (str or rasterio.DatasetReader): The raster data to add. This can be a file path or a rasterio dataset.

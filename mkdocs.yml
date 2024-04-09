@@ -85,6 +85,8 @@ nav:
         - examples/csv.ipynb
         - examples/vector.ipynb
         - examples/ipywidgets.ipynb
+        - examples/raster.ipynb
+
     - Lab:
         - lab/lab4.ipynb
         - lab/lab5.ipynb
