@@ -287,7 +287,6 @@ class Map(ipyleaflet.Map):
                 "Esri.NatGeoWorldMap",
             ],
             value="OpenStreetMap",
-            description="Basemap:",
         )
 
         close_button = widgets.Button(
