@@ -50,7 +50,7 @@ plugins:
           execute: True
           allow_errors: false
           ignore: ["conf.py"]
-          execute_ignore: ["lab/lab5.ipynb", "lab/lab4.ipynb", "examples/csv.ipynb", "examples/demo.ipynb", "examples/intro.ipynb", examples/ipywidgets.ipynb, "examples/vector.ipynb", "examples/ipyleaflet.ipynb"]
+          execute_ignore: ["lab/lab5.ipynb", "lab/lab4.ipynb", "examples/csv.ipynb", "examples/demo.ipynb", "examples/intro.ipynb", "examples/ipywidgets.ipynb", "examples/vector.ipynb", "examples/ipyleaflet.ipynb", "examples/image.ipynb", "examples/lab9.ipynb"]
           
 markdown_extensions:
     - admonition
@@ -89,6 +89,7 @@ nav:
         - examples/image.ipynb
         - examples/image.ipynb
         - examples/lab9.ipynb
+        - examples/toolbars.ipynb
 
 
     - Lab:
