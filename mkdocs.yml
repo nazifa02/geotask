@@ -87,7 +87,6 @@ nav:
         - examples/ipywidgets.ipynb
         - examples/raster.ipynb
         - examples/image.ipynb
-        - examples/image.ipynb
         - examples/lab9.ipynb
         - examples/toolbars.ipynb
         - examples/demo.ipynb
