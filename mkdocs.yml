@@ -90,6 +90,7 @@ nav:
         - examples/image.ipynb
         - examples/lab9.ipynb
         - examples/toolbars.ipynb
+        - examples/demo.ipynb
 
 
     - Lab:
