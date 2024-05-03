@@ -83,6 +83,7 @@ nav:
         - examples/intro.ipynb
         - examples/ipyleaflet.ipynb
         - examples/csv.ipynb
+        - examples/csv_to_points.ipynb
         - examples/vector.ipynb
         - examples/ipywidgets.ipynb
         - examples/raster.ipynb

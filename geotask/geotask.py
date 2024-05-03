@@ -426,4 +426,285 @@ class Map(ipyleaflet.Map):
         with output:
             print("Toolbar is ready")
 
-        
+
+    def add_xy_data(
+        self,
+        in_csv,
+        x="longitude",
+        y="latitude",
+        label=None,
+        layer_name="Marker cluster",
+    ):
+        """Adds points from a CSV file containing lat/lon information and display data on the map.
+
+        Args:
+            in_csv (str): The file path to the input CSV file.
+            x (str, optional): The name of the column containing longitude coordinates. Defaults to "longitude".
+            y (str, optional): The name of the column containing latitude coordinates. Defaults to "latitude".
+            label (str, optional): The name of the column containing label information to used for marker popup. Defaults to None.
+            layer_name (str, optional): The layer name to use. Defaults to "Marker cluster".
+
+        Raises:
+            FileNotFoundError: The specified input csv does not exist.
+            ValueError: The specified x column does not exist.
+            ValueError: The specified y column does not exist.
+            ValueError: The specified label column does not exist.
+        """
+
+
+import pandas as pd
+from shapely.geometry import Point
+
+def csv_to_df(data):
+    df = pd.read_csv(data)
+    df["geometry"] = df.apply(lambda x: Point((float(x["longitude"]), float(x["latitude"]))), axis=1)
+    return df
+
+import geopandas as gpd
+from shapely.geometry import Point
+import pandas as pd
+
+
+
+import os
+import pandas as pd
+import geopandas as gpd
+from shapely.geometry import Point
+
+
+def csv_to_shp(input_csv_path, output_shp_path):
+    # Load data
+    df = pd.read_csv(input_csv_path)
+
+    # Ensure the CSV has 'Longitude' and 'Latitude' columns
+    if 'longitude' not in df.columns or 'latitude' not in df.columns:
+        raise ValueError("CSV file must contain 'longitude' and 'latitude' columns.")
+
+    # Create GeoDataFrame
+    gdf = gpd.GeoDataFrame(
+        df,
+        geometry=[Point(xy) for xy in zip(df['longitude'], df['latitude'])],
+        crs="EPSG:4326"
+    )
+
+    # Save to shapefile
+    gdf.to_file(output_shp_path)
+    print(f"Shapefile created at {output_shp_path}")
+    
+
+
+import os
+import pandas as pd
+import geopandas as gpd
+import matplotlib.pyplot as plt
+from shapely.geometry import Point
+
+def csv_to_geojson(input_csv_path, display_map=False):
+    # Load data
+    try:
+        df = pd.read_csv(input_csv_path)
+    except FileNotFoundError:
+        print(f"Error: File not found at {input_csv_path}")
+        return None
+
+    # Ensure the CSV has 'Longitude', 'Latitude', and 'Population' columns
+    required_columns = ['longitude', 'latitude', 'population']
+    if not all(col in df.columns for col in required_columns):
+        missing_columns = [col for col in required_columns if col not in df.columns]
+        print(f"Error: CSV file must contain the following columns: {', '.join(missing_columns)}")
+        return None
+
+    # Create GeoDataFrame
+    gdf = gpd.GeoDataFrame(
+        df,
+        geometry=[Point(xy) for xy in zip(df['longitude'], df['latitude'])],
+        crs="EPSG:4326"
+    )
+
+    # Display the map if requested
+    if display_map:
+        fig, ax = plt.subplots(figsize=(10, 10))
+        gdf.plot(column='population', cmap='viridis', legend=True, ax=ax)
+        ax.set_title('Population Map')
+        plt.show()
+
+    return gdf
+
+
+import os
+import urllib.request
+import zipfile
+import tarfile
+
+def download_from_url(
+    url: str,
+    out_file_name: str = None,
+    out_dir: str = ".",
+    unzip: bool = True,
+    verbose: bool = True,
+):
+    """Download a file from a URL and optionally unzip it.
+
+    Args:
+        url (str): The HTTP URL to download.
+        out_file_name (str, optional): The output file name to use. Defaults to None.
+        out_dir (str, optional): The output directory to use. Defaults to '.'.
+        unzip (bool, optional): Whether to unzip the downloaded file if it is a zip file. Defaults to True.
+        verbose (bool, optional): Whether to display or not the output of the function.
+    """
+
+
+def add_data(
+    self,
+    data,
+    column,
+    colors=None,
+    labels=None,
+    cmap=None,
+    scheme="Quantiles",
+    k=5,
+    add_legend=True,
+    legend_title=None,
+    legend_position="bottomright",
+    legend_kwds=None,
+    classification_kwds=None,
+    layer_name="Untitled",
+    style=None,
+    hover_style=None,
+    style_callback=None,
+    marker_radius=10,
+    marker_args=None,
+    info_mode="on_hover",
+    encoding="utf-8",
+    **kwargs,
+):
+    """Add vector data to the map with a variety of classification schemes.
+
+    Args:
+        data (str | pd.DataFrame | gpd.GeoDataFrame): The data to classify. It can be a filepath to a vector dataset, a pandas dataframe, or a geopandas geodataframe.
+        column (str): The column to classify.
+        cmap (str, optional): The name of a colormap recognized by matplotlib. Defaults to None.
+        colors (list, optional): A list of colors to use for the classification. Defaults to None.
+        labels (list, optional): A list of labels to use for the legend. Defaults to None.
+        scheme (str, optional): Name of a choropleth classification scheme (requires mapclassify).
+            Name of a choropleth classification scheme (requires mapclassify).
+            A mapclassify.MapClassifier object will be used
+            under the hood. Supported are all schemes provided by mapclassify (e.g.
+            'BoxPlot', 'EqualInterval', 'FisherJenks', 'FisherJenksSampled',
+            'HeadTailBreaks', 'JenksCaspall', 'JenksCaspallForced',
+            'JenksCaspallSampled', 'MaxP', 'MaximumBreaks',
+            'NaturalBreaks', 'Quantiles', 'Percentiles', 'StdMean',
+            'UserDefined'). Arguments can be passed in classification_kwds.
+        k (int, optional): Number of classes (ignored if scheme is None or if column is categorical). Default to 5.
+        add_legend (bool, optional): Whether to add a legend to the map. Defaults to True.
+        legend_title (str, optional): The title of the legend. Defaults to None.
+        legend_position (str, optional): The position of the legend. Can be 'topleft', 'topright', 'bottomleft', or 'bottomright'. Defaults to 'bottomright'.
+        legend_kwds (dict, optional): Keyword arguments to pass to :func:`matplotlib.pyplot.legend` or `matplotlib.pyplot.colorbar`. Defaults to None.
+            Keyword arguments to pass to :func:`matplotlib.pyplot.legend` or
+            Additional accepted keywords when `scheme` is specified:
+            fmt : string
+                A formatting specification for the bin edges of the classes in the
+                legend. For example, to have no decimals: ``{"fmt": "{:.0f}"}``.
+            labels : list-like
+                A list of legend labels to override the auto-generated labblels.
+                Needs to have the same number of elements as the number of
+                classes (`k`).
+            interval : boolean (default False)
+                An option to control brackets from mapclassify legend.
+                If True, open/closed interval brackets are shown in the legend.
+        classification_kwds (dict, optional): Keyword arguments to pass to mapclassify. Defaults to None.
+        layer_name (str, optional): The layer name to be used.. Defaults to "Untitled".
+        style (dict, optional): A dictionary specifying the style to be used. Defaults to None.
+            style is a dictionary of the following form:
+                style = {
+                "stroke": False,
+                "color": "#ff0000",
+                "weight": 1,
+                "opacity": 1,
+                "fill": True,
+                "fillColor": "#ffffff",
+                "fillOpacity": 1.0,
+                "dashArray": "9"
+                "clickable": True,
+            }
+        hover_style (dict, optional): Hover style dictionary. Defaults to {}.
+            hover_style is a dictionary of the following form:
+                hover_style = {"weight": style["weight"] + 1, "fillOpacity": 0.5}
+        style_callback (function, optional): Styling function that is called for each feature, and should return the feature style. This styling function takes the feature as argument. Defaults to None.
+            style_callback is a function that takes the feature as argument and should return a dictionary of the following form:
+            style_callback = lambda feat: {"fillColor": feat["properties"]["color"]}
+        info_mode (str, optional): Displays the attributes by either on_hover or on_click. Any value other than "on_hover" or "on_click" will be treated as None. Defaults to "on_hover".
+        encoding (str, optional): The encoding of the GeoJSON file. Defaults to "utf-8".
+        **kwargs: Additional keyword arguments to pass to the GeoJSON class, such as fields, which can be a list of column names to be included in the popup.
+
+    """
+
+    gdf, legend_dict = classify(
+        data=data,
+        column=column,
+        cmap=cmap,
+        colors=colors,
+        labels=labels,
+        scheme=scheme,
+        k=k,
+        legend_kwds=legend_kwds,
+        classification_kwds=classification_kwds,
+    )
+
+    if legend_title is None:
+        legend_title = column
+
+    if style is None:
+        style = {
+            # "stroke": False,
+            # "color": "#ff0000",
+            "weight": 1,
+            "opacity": 1,
+            # "fill": True,
+            # "fillColor": "#ffffff",
+            "fillOpacity": 1.0,
+            # "dashArray": "9"
+            # "clickable": True,
+        }
+        if colors is not None:
+            style["color"] = "#000000"
+
+    if hover_style is None:
+        hover_style = {"weight": style["weight"] + 1, "fillOpacity": 0.5}
+
+    if style_callback is None:
+        style_callback = lambda feat: {"fillColor": feat["properties"]["color"]}
+
+    if gdf.geometry.geom_type.unique().tolist()[0] == "Point":
+        columns = gdf.columns.tolist()
+        if "category" in columns:
+            columns.remove("category")
+        if "color" in columns:
+            columns.remove("color")
+        if marker_args is None:
+            marker_args = {}
+        if "fill_color" not in marker_args:
+            marker_args["fill_color"] = gdf["color"].tolist()
+        if "stroke" not in marker_args:
+            marker_args["stroke"] = False
+        if "fill_opacity" not in marker_args:
+            marker_args["fill_opacity"] = 0.8
+
+        marker_args["radius"] = marker_radius
+
+        self.add_markers(gdf[columns], layer_name=layer_name, **marker_args)
+    else:
+        self.add_gdf(
+            gdf,
+            layer_name=layer_name,
+            style=style,
+            hover_style=hover_style,
+            style_callback=style_callback,
+            info_mode=info_mode,
+            encoding=encoding,
+            **kwargs,
+        )
+    if add_legend:
+        self.add_legend(
+            title=legend_title, legend_dict=legend_dict, position=legend_position
+        )
