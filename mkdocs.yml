@@ -75,6 +75,7 @@ nav:
     - Home: index.md
     - Installation: installation.md
     - Usage: examples/key_features.ipynb
+    - Get Started: getting_started.md
     - Web App: https://pseudo-map.streamlit.app
     - Contributing: contributing.md
     - FAQ: faq.md
