@@ -5,3 +5,4 @@ pyshp
 geopandas
 localtileserver
 leafmap
+xarray
