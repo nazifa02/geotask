@@ -50,7 +50,7 @@ plugins:
           execute: True
           allow_errors: false
           ignore: ["conf.py"]
-          execute_ignore: ["lab/lab9.ipynb"]
+          execute_ignore: ["lab/lab9.ipynb", "examples/ipywidgets.ipynb", "example/ipyleaflet.ipynb", "examples/raster.ipynb", "examples/vector.ipynb", "examples/folium.ipynb", "examples/image.ipynb"]
           
 markdown_extensions:
     - admonition
