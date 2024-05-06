@@ -1,3 +1,0 @@
-# temp module
-
-::: geotask.temp
