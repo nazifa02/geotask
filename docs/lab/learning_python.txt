@@ -1,3 +1,0 @@
-In Python you can learn the basics of programming.
-In Python you can work with data structures like lists, dictionaries, and sets.
-In Python you can create functions and classes to organize your code.

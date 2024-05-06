@@ -2,10 +2,9 @@
 
 
 [![image](https://img.shields.io/pypi/v/geotask.svg)](https://pypi.python.org/pypi/geotask)
-[![image](https://img.shields.io/conda/vn/conda-forge/geotask.svg)](https://anaconda.org/conda-forge/geotask)
 
 
-**A demo python package**
+**A python package for geospatial analysis**
 
 
 -   Free software: MIT License
@@ -14,7 +13,13 @@
 
 ## Features
 
--   TODO
+-   Creating an interactive map
+-   Changing basemaps interactively
+-   Displaying vector and raster data
+-   Extracting netCDF data
+-   Creating custom legends
+-   Creating time series animations
+-   Building interactive web apps
 
 
 ## Credits
