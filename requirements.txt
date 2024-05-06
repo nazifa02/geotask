@@ -4,3 +4,4 @@ pandas
 pyshp
 geopandas
 localtileserver
+leafmap
