@@ -9,8 +9,6 @@ xarray
 imageio
 ipywidgets
 requests
-shapefile
-random
 folium
 matplotlib
 IPython
