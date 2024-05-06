@@ -6,3 +6,11 @@ geopandas
 localtileserver
 leafmap
 xarray
+imageio
+ipywidgets
+requests
+shapefile
+random
+folium
+matplotlib
+IPython
