@@ -2,7 +2,9 @@
 
 ## Install from PyPI
 
+
 geotask is available on [PyPI](https://pypi.org/project/geotask/). To install geotask, run this command in your terminal:
+
 
 ```
 pip install geotask
@@ -22,7 +24,8 @@ pip install git+https://github.com/nazifa02/geotask
 
 ## Upgrade geotask
 
-If you have installed **geotask** before and want to upgrade to the latest version, you can run the following command in your terminal:
+
+If you have installed **geotask** before and you want to upgrade to the latest version, you can run the following command in your terminal:
 
 ```
 pip install -U geotask
