@@ -75,7 +75,7 @@ nav:
     - Home: index.md
     - Installation: installation.md
     - Usage: examples/key_features.ipynb
-    - Get Started: getting_started.md
+    - Get Started: get_started.md
     - Web App: https://pseudo-map.streamlit.app
     - Contributing: contributing.md
     - FAQ: faq.md
@@ -90,7 +90,6 @@ nav:
         - examples/ipywidgets.ipynb
         - examples/vector.ipynb
         - examples/raster.ipynb
-        - examples/timelapse.ipynb
 
     - Lab:
         - lab/lab9.ipynb
